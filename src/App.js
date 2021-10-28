@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState } from "react";
+import Navigation from "./Navigation";
+import Home from "./Home";
+import Sub from "./Sub";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {
+  const [subroute, setSubroute] = useState("");
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Navigation subroute={subroute} />
+      </div>
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+      </Switch>
+      <Switch>
+        <Route path="/:name">
+          <Sub setSubroute={setSubroute} />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
